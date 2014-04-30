@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">dealby</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_details_order">DetailsOrderActivity</string>
+
+    <!-- Buttons -->
+    <string name="ok_button">OK</string>
+    <!-- Titles and Captions -->
+    <string name="error_title">Error</string>
+    <string name="orders_title">Orders</string>
+    <string name="items_title">Items</string>
+    <string name="search_in_orders">Search in Orders</string>
+    <string name="order_number">Order number</string>
+    <string name="order_customer">Customer</string>
+    <string name="order_time">Time</string>
+    <string name="order_phone">Phone</string>
+    <string name="order_address">Address</string>
+    <string name="order_mail">Email</string>
+
+    <!-- Messages -->
+    <string name="retrieving_data_trouble_message">Some troubles have occurred during retrieving data from server.</string>
+    <string name="no_network_connection">No Network Connection Available! Please Check Your Connection Settings.</string>
+    <string name="empty"></string>
+
+</resources>

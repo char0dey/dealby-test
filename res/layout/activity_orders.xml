@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrdersActivity" >
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/list_selector"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/main_header"
+            style="@style/HeaderRow"
+            android:layout_width="fill_parent"
+            android:layout_height="28dp"
+            android:background="#90A9Bf"
+            android:gravity="center_horizontal"
+            android:hint="@string/orders_title"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:minLines="1"
+            android:selectAllOnFocus="false"
+            android:text="@string/orders_title"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progress_load"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:max="100"
+            android:minHeight="12dp"
+            android:progress="20"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/listLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/headerLayout"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/txbSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_in_orders"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
+
+        <ListView
+            android:id="@+id/lv_orders"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:divider="@drawable/devider"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/border" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>
