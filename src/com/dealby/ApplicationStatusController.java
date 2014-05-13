@@ -7,9 +7,6 @@ import android.app.Activity;
 import android.widget.ProgressBar;
 
 import com.dealby.models.Orders;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 public class ApplicationStatusController {
 
@@ -19,7 +16,6 @@ public class ApplicationStatusController {
 	private ExecutorService executorService;
 	private Orders searchResultOrders;
 	private Orders orders;
-	private DisplayImageOptions optionsForCashImg;
 
 	public static ApplicationStatusController getInstance() {
 		if (instance == null) {
@@ -33,21 +29,6 @@ public class ApplicationStatusController {
 			executorService = Executors.newFixedThreadPool(10);
 		}
 		return executorService;
-	}
-
-	public DisplayImageOptions getOptionsForCashImg() {
-
-		if (optionsForCashImg == null) {
-			optionsForCashImg = new DisplayImageOptions.Builder()
-					.showImageOnLoading(R.drawable.loading)
-					.showImageForEmptyUri(R.drawable.emptyimg)
-					.showImageOnFail(R.drawable.emptyimg).cacheInMemory(true)
-					.cacheOnDisc(true)
-					.displayer(new RoundedBitmapDisplayer(20))
-					.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-					.build();
-		}
-		return optionsForCashImg;
 	}
 
 	public Activity getCurrentActivity() {

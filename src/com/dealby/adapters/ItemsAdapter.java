@@ -7,9 +7,6 @@ import com.dealby.R;
 import com.dealby.models.Item;
 import com.dealby.models.Items;
 import com.dealby.models.Order;
-import com.dealby.utils.AnimateFirstDisplayListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
@@ -28,16 +25,16 @@ public class ItemsAdapter extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	private int orderPos;
 	private List<Item> items;
-	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
-	public ItemsAdapter(Activity activity , int pos) {
+	public ItemsAdapter(Activity activity, int pos) {
 		this.orderPos = pos;
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
-		items = ApplicationStatusController.getInstance().getSearchResultOrders()
-		.getListOrder().get(orderPos).getItems().getListItem();
-		
+
+		items = ApplicationStatusController.getInstance()
+				.getSearchResultOrders().getListOrder().get(orderPos)
+				.getItems().getListItem();
+
 	}
 
 	public int getCount() {
@@ -71,53 +68,49 @@ public class ItemsAdapter extends BaseAdapter {
 		value = item_details.getName();
 		if (value != null)
 			label_name.setText(value);
-		
+
 		value = item_details.getQuantity();
-		if (value != null)
-		{
+		if (value != null) {
 			double dbl = 0;
 			try {
 				dbl = Double.parseDouble(value);
-			}
-			catch (NumberFormatException ex) {
+			} catch (NumberFormatException ex) {
 				Log.e("ItemsAdapter.StrToInt", ex.getMessage());
 			}
-			label_count.setText((int)dbl +  " pcs");
+			label_count.setText((int) dbl + " pcs");
 		}
-		
+
 		value = item_details.getPrice();
 		if (value != null)
-			label_price.setText(value +" "+ item_details.getCurrency());
-		
-//		value = item_details.getImage();
-//		if (value != null){
-//			ImageLoader
-//					.getInstance()
-//					.displayImage(
-//							value,
-//							list_image,
-//							ApplicationStatusController.getInstance().getOptionsForCashImg(),
-//							animateFirstListener);
-//		} else {
-//			ImageLoader
-//					.getInstance()
-//					.displayImage(
-//							null,
-//							list_image,
-//							ApplicationStatusController.getInstance().getOptionsForCashImg(),
-//							animateFirstListener);
-//		}
+			label_price.setText(value + " " + item_details.getCurrency());
+
+		// value = item_details.getImage();
+		// if (value != null){
+		// ImageLoader
+		// .getInstance()
+		// .displayImage(
+		// value,
+		// list_image,
+		// ApplicationStatusController.getInstance().getOptionsForCashImg(),
+		// animateFirstListener);
+		// } else {
+		// ImageLoader
+		// .getInstance()
+		// .displayImage(
+		// null,
+		// list_image,
+		// ApplicationStatusController.getInstance().getOptionsForCashImg(),
+		// animateFirstListener);
+		// }
 
 		value = item_details.getImage();
-		if (value != null){
-		Picasso.with(parent.getContext())
-	    .load(value)
-	    .placeholder(R.drawable.emptyimg)
-	    .error(R.drawable.emptyimg)
-	    .resize(120, 120)
-	    .into(list_image);
-		} 
-	
+		if (value != null) {
+			Picasso.with(parent.getContext()).load(value)
+					.placeholder(R.drawable.emptyimg)
+					.error(R.drawable.emptyimg).resize(120, 120)
+					.into(list_image);
+		}
+
 		return vi;
 	}
 }

@@ -1,21 +1,9 @@
 package com.dealby.activities;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.dealby.ApplicationStatusController;
 import com.dealby.R;
 import com.dealby.asynctasks.ListViewLoaderTask;
 import com.dealby.utils.Utils;
-import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache;
-import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.utils.L;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -36,8 +24,6 @@ import android.widget.AdapterView.OnItemClickListener;
 public class OrdersActivity extends Activity {
 
 	// private static String TAG = "OrdersActivity";
-
-	private static final String IMG_FILE_NAME = "Universal Image Loader @#&=+-_.,!()~'%20.png";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,13 +64,6 @@ public class OrdersActivity extends Activity {
 				return false;
 			}
 		});
-
-		File imageOnSdCard = new File("/mnt/sdcard", IMG_FILE_NAME);
-		if (!imageOnSdCard.exists()) {
-			copyTestImageToSdCard(imageOnSdCard);
-		}
-
-		initImageLoader(getApplicationContext());
 	}
 
 	@Override
@@ -142,55 +121,6 @@ public class OrdersActivity extends Activity {
 			}
 
 		});
-	}
-
-	public static void initImageLoader(Context context) {
-		// This configuration tuning is custom. You can tune every option, you
-		// may tune some of them,
-		// or you can create default configuration by
-		// ImageLoaderConfiguration.createDefault(this);
-		// method.
-		File cacheDir = StorageUtils.getOwnCacheDirectory(context,
-				"DealBy/ImageCache");
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-				context).threadPriority(Thread.NORM_PRIORITY - 2)
-				.denyCacheImageMultipleSizesInMemory()
-				.discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-				.tasksProcessingOrder(QueueProcessingType.FIFO)
-				.writeDebugLogs()
-				// Remove for release app
-				.memoryCacheExtraOptions(64, 64)
-				.discCache(new LimitedAgeDiscCache(cacheDir, 604800)).build();
-
-		// Initialize ImageLoader with configuration.
-		L.disableLogging();
-		ImageLoader.getInstance().init(config);
-	}
-
-	private void copyTestImageToSdCard(final File testImageOnSdCard) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					InputStream is = getAssets().open(IMG_FILE_NAME);
-					FileOutputStream fos = new FileOutputStream(
-							testImageOnSdCard);
-					byte[] buffer = new byte[8192];
-					int read;
-					try {
-						while ((read = is.read(buffer)) != -1) {
-							fos.write(buffer, 0, read);
-						}
-					} finally {
-						fos.flush();
-						fos.close();
-						is.close();
-					}
-				} catch (IOException e) {
-					L.w("Can't copy test image onto SD card");
-				}
-			}
-		}).start();
 	}
 
 }
