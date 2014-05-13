@@ -10,6 +10,7 @@ import com.dealby.models.Order;
 import com.dealby.utils.AnimateFirstDisplayListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
 import android.content.Context;
@@ -88,25 +89,34 @@ public class ItemsAdapter extends BaseAdapter {
 		if (value != null)
 			label_price.setText(value +" "+ item_details.getCurrency());
 		
+//		value = item_details.getImage();
+//		if (value != null){
+//			ImageLoader
+//					.getInstance()
+//					.displayImage(
+//							value,
+//							list_image,
+//							ApplicationStatusController.getInstance().getOptionsForCashImg(),
+//							animateFirstListener);
+//		} else {
+//			ImageLoader
+//					.getInstance()
+//					.displayImage(
+//							null,
+//							list_image,
+//							ApplicationStatusController.getInstance().getOptionsForCashImg(),
+//							animateFirstListener);
+//		}
+
 		value = item_details.getImage();
 		if (value != null){
-			ImageLoader
-					.getInstance()
-					.displayImage(
-							value,
-							list_image,
-							ApplicationStatusController.getInstance().getOptionsForCashImg(),
-							animateFirstListener);
-		} else {
-			ImageLoader
-					.getInstance()
-					.displayImage(
-							null,
-							list_image,
-							ApplicationStatusController.getInstance().getOptionsForCashImg(),
-							animateFirstListener);
-		}
-
+		Picasso.with(parent.getContext())
+	    .load(value)
+	    .placeholder(R.drawable.emptyimg)
+	    .error(R.drawable.emptyimg)
+	    .resize(120, 120)
+	    .into(list_image);
+		} 
 	
 		return vi;
 	}

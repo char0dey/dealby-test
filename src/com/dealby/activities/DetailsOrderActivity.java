@@ -50,6 +50,10 @@ public class DetailsOrderActivity extends Activity {
 	private OnSwipeTouchListener swipeTouchListener = new OnSwipeTouchListener() {
 
 		public void onSwipeTop() {
+			Toast.makeText(
+					ApplicationStatusController.getInstance()
+							.getCurrentActivity(), "onSwipeTop",
+					Toast.LENGTH_LONG).show();
 		}
 
 		public void onSwipeRight() {
